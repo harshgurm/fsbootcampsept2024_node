@@ -3,16 +3,16 @@ const os = require('os');
 const fs = require('fs')
 const data = require('./module');
 
-// console.log(path.parse(__filename));
-// console.log('Total Memory' + os.totalmem());
-// console.log('Free Memory' + os.freemem());
-// console.log(os.hostname())
+console.log(path.parse(__filename));
+console.log('Total Memory' + os.totalmem());
+console.log('Free Memory' + os.freemem());
+console.log(os.hostname())
 
 //using async function
-// fs.readFile('promise.js', "utf8", (error, data) => {
-//     if(error) console.log('Error', error);
-//     console.log(data);
-// })
+fs.readFile('promise.js', "utf8", (error, data) => {
+    if(error) console.log('Error', error);
+    console.log(data);
+})
 
 //using sync function
 // try {

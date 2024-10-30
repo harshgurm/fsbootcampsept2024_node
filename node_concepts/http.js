@@ -2,7 +2,7 @@ const http = require('http');
 
 const server = http.createServer((request, response) => {
     if(request.url == '/'){
-        response.write('This is home page');
+        response.write('This is main page. I am adding another line here');
     } else if(request.url == '/contact'){
         response.write('This is contact page');
     } else if(request.url == '/about'){
@@ -10,9 +10,6 @@ const server = http.createServer((request, response) => {
     } else {
         response.write('Page not found');
     }
-
-    //task 
-    //implement the about page
     response.end();
 });
 

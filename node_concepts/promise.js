@@ -1,3 +1,5 @@
+const deepika = require('./module')
+
 const promise = new Promise( (resolve, reject) => {
     setTimeout(() => {
         // resolve('Money is returned')
@@ -12,3 +14,6 @@ promise.then((data) => {
     console.log('Coming in the catch condition')
     console.log(error);
 })
+
+console.log(deepika.name);
+console.log(deepika.hello('Deepika'))

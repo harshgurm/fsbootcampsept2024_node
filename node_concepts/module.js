@@ -6,3 +6,5 @@ function hello(name){
 
 module.exports.name = name;
 module.exports.hello = hello;
+
+console.log(module);
