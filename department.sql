@@ -1,5 +1,8 @@
 use fsbootcamp2024;
 
+-- This is my work in my dev branch
+-- think of it as a big project that i worked on
+
 -- adding the comment to make it appear in the git diff
 
 -- AUTO_INCREMENT - check the id of previously inserted row and increment(plus) 1 to it.
