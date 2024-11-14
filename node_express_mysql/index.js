@@ -3,9 +3,13 @@ const app = express();
 const connection = require('./connection');
 const port = 3000;
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send('Hello world');
 })
+
+
 
 app.get('/employees/', async (req, res) => {
     try {
@@ -34,7 +38,7 @@ app.get('/employees/:id', async (req, res) => {
             SELECT * 
             FROM fsbootcamp2024.employees 
             WHERE employee_id = ?`, employee_id);
-            if(data.length > 0){
+            if(data.length > 0){ 
                 return res.json(data);
             } else {
                 return res.json('Employee not found');
@@ -45,9 +49,50 @@ app.get('/employees/:id', async (req, res) => {
 })
 
 app.post('/employees/', async (req, res) => {
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
-    const department_id = req.body.department_id;
+    // const first_name = req.body.first_name;
+    // const last_name = req.body.last_name;
+    // const department_id = req.body.department_id;
+    var { first_name, last_name, salary, department_id } = req.body;
+    if(!first_name || !department_id) return res.send('Please provide the first name and the department');
+
+    if(last_name == ''){
+        last_name = '';
+    } 
+
+    if(salary == ''){
+        salary = 0;
+    }
+
+    try {
+        const [data] = await connection.promise().query(`
+            INSERT INTO fsbootcamp2024.employees (first_name, last_name, salary, department_id)
+            VALUES(?,?,?,?)`, [first_name, last_name, salary, department_id]);
+            if(data.affectedRows > 0){
+                return res.json('Employees created successfully')
+            } else {
+                return res.json('Failed to insert employees')
+            }
+    } catch(errors) {
+        res.send(errors);
+    }
+})
+
+//Task - do the insert for departments
+
+app.put('/employees/update/:id', async(req, res) => {
+    const employee_id = req.params.id;
+    const { first_name } = req.body;
+
+    try {
+        const [data] = await connection.promise().query(`
+            UPDATE fsbootcamp2024.employees
+            SET first_name = ?
+            WHERE employee_id = ?`, [first_name, employee_id])
+        res.json(data);        
+    } catch(errors) {
+        res.json(errors);
+    }
+
 })
 
 
